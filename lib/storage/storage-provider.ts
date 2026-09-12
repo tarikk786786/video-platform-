@@ -1,4 +1,4 @@
-﻿export interface UploadOptions {
+export interface UploadOptions {
   contentType: string;
   filename?: string;
   isPublic?: boolean;
@@ -7,7 +7,7 @@
 
 export interface StorageUploadResult {
   key: string;
-  storageProvider: 'telegram' | 'local' | 'r2' | 's3' | 'backblaze' | 'minio';
+  storageProvider: 'telegram' | 'seaweedfs' | 's3' | 'r2' | 'local' | 'backblaze' | 'minio';
   url: string;
   sizeBytes: number;
   mimeType: string;

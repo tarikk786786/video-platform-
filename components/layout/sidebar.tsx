@@ -18,10 +18,12 @@ import {
   PlusCircle,
   LayoutDashboard,
   ShieldAlert,
+  HardDrive,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/home', icon: Home },
+  { label: 'Cloud Drive', href: '/drive', icon: HardDrive },
   { label: 'Shorts', href: '/shorts', icon: Film },
   { label: 'Communities', href: '/communities', icon: Network },
   { label: 'Live Stream', href: '/live', icon: Radio },

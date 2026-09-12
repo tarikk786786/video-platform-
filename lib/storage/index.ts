@@ -1,10 +1,12 @@
-﻿import { StorageProvider } from './storage-provider';
+import { StorageProvider } from './storage-provider';
 import { TelegramStorage } from './telegram-storage';
 import { LocalStorage } from './local-storage';
+import { SeaweedFSStorageProvider } from './seaweedfs-storage';
 
 export * from './storage-provider';
 export * from './telegram-storage';
 export * from './local-storage';
+export * from './seaweedfs-storage';
 
 let defaultProviderInstance: StorageProvider | null = null;
 
@@ -19,6 +21,10 @@ export function getStorageProvider(overrideType?: string): StorageProvider {
   switch (providerType.toLowerCase()) {
     case 'telegram':
       provider = new TelegramStorage();
+      break;
+    case 'seaweedfs':
+    case 's3':
+      provider = new SeaweedFSStorageProvider();
       break;
     case 'local':
     default:

@@ -13,11 +13,13 @@ import {
   BarChart2,
   MessageSquare,
   Check,
+  HardDrive,
 } from 'lucide-react';
 
 export function ContentCard({ item }: { item: ContentItem }) {
   const [showMenu, setShowMenu] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [savedToDrive, setSavedToDrive] = useState(false);
   const [selectedPollOpt, setSelectedPollOpt] = useState<string | null>(null);
 
   const formatDuration = (seconds?: number) => {
@@ -162,6 +164,18 @@ export function ContentCard({ item }: { item: ContentItem }) {
               >
                 <Bookmark className="w-3.5 h-3.5" />
                 <span>{saved ? 'Saved' : 'Save to Bookmark'}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setSavedToDrive(!savedToDrive);
+                  setShowMenu(false);
+                  alert(`"${item.title.substring(0, 30)}..." saved to your Personal Cloud Drive!`);
+                }}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg text-foreground hover:bg-accent text-left transition-colors"
+              >
+                <HardDrive className="w-3.5 h-3.5 text-primary" />
+                <span>{savedToDrive ? 'Saved in Drive' : 'Save to My Drive'}</span>
               </button>
 
               <button

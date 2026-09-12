@@ -470,3 +470,243 @@ export const CATEGORIES = [
   'News',
   'Art'
 ];
+
+export interface DriveFolder {
+  id: string;
+  name: string;
+  parentId: string | null;
+  color?: string;
+  isStarred?: boolean;
+  itemCount: number;
+  sizeBytes: number;
+  updatedAt: string;
+}
+
+export interface DriveFile {
+  id: string;
+  folderId: string | null;
+  name: string;
+  extension: string;
+  mimeType: string;
+  category: 'video' | 'photo' | 'audio' | 'document' | 'code' | 'archive' | 'binary';
+  sizeBytes: number;
+  sha256Hash: string;
+  storageProvider: 'telegram' | 'seaweedfs' | 's3' | 'r2' | 'local';
+  storageKey: string;
+  storageUrl?: string;
+  thumbnailUrl?: string;
+  isStarred: boolean;
+  isTrashed: boolean;
+  isPublishedToSocial: boolean;
+  version: number;
+  updatedAt: string;
+}
+
+export interface StorageQuota {
+  totalBytes: number;
+  usedBytes: number;
+  fileCount: number;
+  videoBytes: number;
+  photoBytes: number;
+  audioBytes: number;
+  docBytes: number;
+  archiveBytes: number;
+  otherBytes: number;
+}
+
+export const MOCK_STORAGE_QUOTA: StorageQuota = {
+  totalBytes: 1099511627776, // 1 TB
+  usedBytes: 84620000000,    // ~84.62 GB
+  fileCount: 342,
+  videoBytes: 52400000000,   // ~52.4 GB
+  photoBytes: 18200000000,   // ~18.2 GB
+  audioBytes: 7400000000,    // ~7.4 GB
+  docBytes: 2800000000,      // ~2.8 GB
+  archiveBytes: 3100000000,  // ~3.1 GB
+  otherBytes: 720000000,     // ~720 MB
+};
+
+export const MOCK_DRIVE_FOLDERS: DriveFolder[] = [
+  {
+    id: 'f-videos',
+    name: 'Videos & Streams',
+    parentId: null,
+    color: '#ef4444',
+    isStarred: true,
+    itemCount: 48,
+    sizeBytes: 52400000000,
+    updatedAt: '2 hours ago',
+  },
+  {
+    id: 'f-images',
+    name: 'Photos & Artwork',
+    parentId: null,
+    color: '#3b82f6',
+    isStarred: true,
+    itemCount: 184,
+    sizeBytes: 18200000000,
+    updatedAt: 'Yesterday',
+  },
+  {
+    id: 'f-podcasts',
+    name: 'Audio Masters & Podcasts',
+    parentId: null,
+    color: '#8b5cf6',
+    isStarred: false,
+    itemCount: 32,
+    sizeBytes: 7400000000,
+    updatedAt: 'Sep 8, 2026',
+  },
+  {
+    id: 'f-docs',
+    name: 'Documents & Whitepapers',
+    parentId: null,
+    color: '#10b981',
+    isStarred: false,
+    itemCount: 56,
+    sizeBytes: 2800000000,
+    updatedAt: 'Sep 4, 2026',
+  },
+  {
+    id: 'f-backups',
+    name: 'Archives & Source Code',
+    parentId: null,
+    color: '#f59e0b',
+    isStarred: false,
+    itemCount: 22,
+    sizeBytes: 3820000000,
+    updatedAt: 'Aug 28, 2026',
+  },
+];
+
+export const MOCK_DRIVE_FILES: DriveFile[] = [
+  {
+    id: 'file-1',
+    folderId: 'f-videos',
+    name: 'Decentralized_Infrastructure_Keynote_4K.mp4',
+    extension: 'mp4',
+    mimeType: 'video/mp4',
+    category: 'video',
+    sizeBytes: 1480000000, // 1.48 GB
+    sha256Hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+    storageProvider: 'seaweedfs',
+    storageKey: 'drive/videos/keynote_4k.mp4',
+    storageUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+    isStarred: true,
+    isTrashed: false,
+    isPublishedToSocial: true,
+    version: 2,
+    updatedAt: 'Just now',
+  },
+  {
+    id: 'file-2',
+    folderId: 'f-images',
+    name: 'Future_City_Cyberpunk_Artwork_Raw.png',
+    extension: 'png',
+    mimeType: 'image/png',
+    category: 'photo',
+    sizeBytes: 18400000, // 18.4 MB
+    sha256Hash: 'a89c72e21b194f4c8996fb92427ae41e4649b934ca495991b7852b8558492049',
+    storageProvider: 'telegram',
+    storageKey: 'drive/photos/cyberpunk_art.png',
+    storageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800',
+    isStarred: true,
+    isTrashed: false,
+    isPublishedToSocial: false,
+    version: 1,
+    updatedAt: '3 hours ago',
+  },
+  {
+    id: 'file-3',
+    folderId: 'f-docs',
+    name: 'FreedomPlay_Architecture_Whitepaper_v2.pdf',
+    extension: 'pdf',
+    mimeType: 'application/pdf',
+    category: 'document',
+    sizeBytes: 8400000, // 8.4 MB
+    sha256Hash: 'b48291a109fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b812',
+    storageProvider: 'seaweedfs',
+    storageKey: 'drive/docs/whitepaper_v2.pdf',
+    storageUrl: 'https://raw.githubusercontent.com/mozilla/pdf.js/master/examples/learning/helloworld.pdf',
+    isStarred: false,
+    isTrashed: false,
+    isPublishedToSocial: true,
+    version: 3,
+    updatedAt: 'Yesterday',
+  },
+  {
+    id: 'file-4',
+    folderId: 'f-podcasts',
+    name: 'Sovereign_Net_Episode_24_Master.mp3',
+    extension: 'mp3',
+    mimeType: 'audio/mpeg',
+    category: 'audio',
+    sizeBytes: 84200000, // 84.2 MB
+    sha256Hash: 'c710492198fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b877',
+    storageProvider: 'telegram',
+    storageKey: 'drive/audio/episode_24.mp3',
+    storageUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800',
+    isStarred: true,
+    isTrashed: false,
+    isPublishedToSocial: true,
+    version: 1,
+    updatedAt: 'Sep 9, 2026',
+  },
+  {
+    id: 'file-5',
+    folderId: 'f-backups',
+    name: 'distributed_media_worker.ts',
+    extension: 'ts',
+    mimeType: 'text/plain',
+    category: 'code',
+    sizeBytes: 18400, // 18.4 KB
+    sha256Hash: 'd928401928fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b899',
+    storageProvider: 'local',
+    storageKey: 'drive/code/worker.ts',
+    storageUrl: '',
+    isStarred: false,
+    isTrashed: false,
+    isPublishedToSocial: false,
+    version: 4,
+    updatedAt: 'Sep 5, 2026',
+  },
+  {
+    id: 'file-6',
+    folderId: 'f-backups',
+    name: 'FreedomPlay_Full_Vault_Backup.zip',
+    extension: 'zip',
+    mimeType: 'application/zip',
+    category: 'archive',
+    sizeBytes: 420000000, // 420 MB
+    sha256Hash: 'f492049182fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b800',
+    storageProvider: 'seaweedfs',
+    storageKey: 'drive/archives/backup.zip',
+    storageUrl: '',
+    isStarred: false,
+    isTrashed: false,
+    isPublishedToSocial: false,
+    version: 1,
+    updatedAt: 'Aug 29, 2026',
+  },
+  {
+    id: 'file-7',
+    folderId: null,
+    name: 'linux_live_environment_x86_64.iso',
+    extension: 'iso',
+    mimeType: 'application/octet-stream',
+    category: 'binary',
+    sizeBytes: 2147483648, // 2.14 GB
+    sha256Hash: '9840294829fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b844',
+    storageProvider: 'seaweedfs',
+    storageKey: 'drive/binaries/linux.iso',
+    storageUrl: '',
+    isStarred: false,
+    isTrashed: false,
+    isPublishedToSocial: false,
+    version: 1,
+    updatedAt: 'Aug 20, 2026',
+  },
+];

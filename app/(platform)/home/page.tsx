@@ -1,8 +1,10 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { MOCK_CONTENTS, CATEGORIES } from '@/lib/mock-data';
 import { ContentCard } from '@/components/video/content-card';
+import { StoriesBar } from '@/components/stories/stories-bar';
+import { UniversalComposer } from '@/components/upload/universal-composer';
 import { Flame, Sparkles, Users } from 'lucide-react';
 
 export default function HomePage() {
@@ -17,7 +19,16 @@ export default function HomePage() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-7xl mx-auto">
+      {/* 24-hour Ephemeral Stories Reel */}
+      <section className="bg-card/40 border border-border/40 p-4 rounded-3xl backdrop-blur-md">
+        <StoriesBar />
+      </section>
+
+      {/* Universal Omnichannel Post Composer */}
+      <UniversalComposer />
+
+      {/* Feed Filter Headers & Tabs */}
       <div className="flex items-center justify-between border-b border-border/40 pb-4">
         <div className="flex items-center gap-2 bg-secondary/40 p-1 rounded-2xl border border-border/40">
           <button

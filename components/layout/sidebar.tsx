@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -8,6 +8,10 @@ import {
   TrendingUp,
   Users,
   Film,
+  Radio,
+  Network,
+  Headphones,
+  Calendar,
   MessageSquare,
   Bell,
   Bookmark,
@@ -19,9 +23,13 @@ import {
 const NAV_ITEMS = [
   { label: 'Home', href: '/home', icon: Home },
   { label: 'Shorts', href: '/shorts', icon: Film },
+  { label: 'Communities', href: '/communities', icon: Network },
+  { label: 'Live Stream', href: '/live', icon: Radio },
   { label: 'Explore', href: '/explore', icon: Compass },
   { label: 'Trending', href: '/trending', icon: TrendingUp },
   { label: 'Following', href: '/following', icon: Users },
+  { label: 'Podcasts', href: '/podcasts', icon: Headphones },
+  { label: 'Events', href: '/events', icon: Calendar },
   { label: 'Messages', href: '/messages', icon: MessageSquare },
   { label: 'Notifications', href: '/notifications', icon: Bell },
   { label: 'Bookmarks', href: '/bookmarks', icon: Bookmark },
@@ -33,10 +41,10 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r border-border/40 bg-card/60 backdrop-blur-xl h-[calc(100vh-4rem)] sticky top-16 hidden md:flex flex-col justify-between p-4 z-20">
+    <aside className="w-64 border-r border-border/40 bg-card/60 backdrop-blur-xl h-[calc(100vh-4rem)] sticky top-16 hidden md:flex flex-col justify-between p-4 z-20 overflow-y-auto">
       <div className="space-y-1">
         <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-          Discover
+          Universal Social
         </div>
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -58,16 +66,16 @@ export function Sidebar() {
         })}
       </div>
 
-      <div className="pt-4 border-t border-border/40 space-y-2">
+      <div className="pt-4 border-t border-border/40 space-y-2 shrink-0">
         <Link
           href="/upload"
           className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-semibold text-sm shadow-md shadow-blue-500/20 transition-all active:scale-[0.98]"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>Publish Content</span>
+          <span>Universal Create</span>
         </Link>
-        <div className="text-xs text-center text-muted-foreground/60 pt-2">
-          Freedom-First Architecture v1.0
+        <div className="text-[11px] text-center text-muted-foreground/70 pt-1">
+          Freedom-First Social Matrix v2.0
         </div>
       </div>
     </aside>
